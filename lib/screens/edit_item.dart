@@ -25,14 +25,10 @@ class _EditItemState extends State<EditItem> {
 
   void _addItem() {
     addItem(_nameController.text, _descriptionController.text);
-    _nameController.clear();
-    _descriptionController.clear();
   }
 
   void _updateItem(String itemId) {
     updateItem(itemId, _nameController.text, _descriptionController.text);
-    _nameController.clear();
-    _descriptionController.clear();
   }
 
   @override
@@ -78,5 +74,12 @@ class _EditItemState extends State<EditItem> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _descriptionController.dispose();
+    super.dispose();
   }
 }

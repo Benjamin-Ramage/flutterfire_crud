@@ -4,11 +4,6 @@ import 'package:flutterfire_crud/screens/edit_item.dart';
 import 'package:flutterfire_crud/services/firestore_service.dart';
 
 class ItemsScreen extends StatelessWidget {
-
-  void _deleteItem(String itemId) async {
-   await deleteItem(itemId);
-  }
-
   const ItemsScreen({super.key});
 
   @override
@@ -30,7 +25,7 @@ class ItemsScreen extends StatelessWidget {
           stream: itemsCollection.snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator());
             }
             if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
@@ -55,7 +50,8 @@ class ItemsScreen extends StatelessWidget {
                       IconButton(
                         onPressed: () {
                           Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => EditItem(
+                            MaterialPageRoute(
+                              builder: (context) => EditItem(
                               itemId: itemId,
                               itemName: itemName,
                               itemDescription: itemDescription,
@@ -76,5 +72,9 @@ class ItemsScreen extends StatelessWidget {
             );
           }),
     );
+  }
+
+  void _deleteItem(String itemId) async {
+    await deleteItem(itemId);
   }
 }
