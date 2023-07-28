@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "556693878381",
+    "project_id": "fir-crud-eb5f5",
+    "storage_bucket": "fir-crud-eb5f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556693878381:android:fe5dc5b0a49ca36e2af164",
+        "android_client_info": {
+          "package_name": "com.benramage.flutterfire_crud"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556693878381-2lqulvhi5gd63l3o89gf89nurjpr00a8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVDZP6DwLBRQdqi9l4HOzbdh9xksH7UTc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556693878381-2lqulvhi5gd63l3o89gf89nurjpr00a8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
