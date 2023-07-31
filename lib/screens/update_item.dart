@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import '../services/firestore_service.dart';
 
-class AddItem extends StatefulWidget {
+class UpdateItem extends StatefulWidget {
   final String itemId;
   final String itemName;
   final String itemDescription;
 
-  const AddItem({super.key, required this.itemId, required this.itemName, required this.itemDescription});
+  const UpdateItem({super.key, required this.itemId, required this.itemName, required this.itemDescription});
 
   @override
-  State<AddItem> createState() => _AddItemState();
+  State<UpdateItem> createState() => _UpdateItemState();
 }
 
-class _AddItemState extends State<AddItem> {
+class _UpdateItemState extends State<UpdateItem> {
   final  _nameController = TextEditingController();
   final  _descriptionController = TextEditingController();
 
@@ -23,15 +23,15 @@ class _AddItemState extends State<AddItem> {
     super.initState();
   }
 
-  void _addItem() {
-    addItem(_nameController.text, _descriptionController.text);
+  void _updateItem(String itemId) {
+    updateItem(itemId, _nameController.text, _descriptionController.text);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Item'),
+        title: const Text('Edit Item'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -51,10 +51,10 @@ class _AddItemState extends State<AddItem> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    _addItem();
+                    _updateItem(widget.itemId);
                     Navigator.pop(context);
                   },
-                  child: const Text('Add Item'),
+                  child: const Text('Update Item'),
                 ),
               ],
             ),

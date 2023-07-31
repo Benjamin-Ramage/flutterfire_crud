@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_crud/screens/edit_item.dart';
+import 'package:flutterfire_crud/screens/update_item.dart';
 import 'package:flutterfire_crud/services/firestore_service.dart';
 
 class ItemsScreen extends StatelessWidget {
@@ -15,7 +16,7 @@ class ItemsScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const EditItem(itemId: '', itemName: '', itemDescription: '',)));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AddItem(itemId: '', itemName: '', itemDescription: '',)));
             },
             icon: const Icon(Icons.add),
           ),
@@ -50,8 +51,7 @@ class ItemsScreen extends StatelessWidget {
                       IconButton(
                         onPressed: () {
                           Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => EditItem(
+                            MaterialPageRoute(builder: (context) => UpdateItem(
                               itemId: itemId,
                               itemName: itemName,
                               itemDescription: itemDescription,
