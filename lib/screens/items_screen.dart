@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterfire_crud/screens/edit_item.dart';
-import 'package:flutterfire_crud/screens/update_item.dart';
-import 'package:flutterfire_crud/services/firestore_service.dart';
+import 'package:flutterfire_crud/screens/add_edit_item_screen.dart';
+import 'package:flutterfire_crud/screens/update_item_screen.dart';
+import 'package:flutterfire_crud/service/firestore_service.dart';
 
 class ItemsScreen extends StatelessWidget {
   const ItemsScreen({super.key});
@@ -16,14 +16,14 @@ class ItemsScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AddItem(itemId: '', itemName: '', itemDescription: '',)));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AddEditScreen(itemId: '')));
             },
             icon: const Icon(Icons.add),
           ),
         ],
       ),
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-          stream: itemsCollection.snapshots(),
+          stream: itemsCollection.orderBy('name').snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
@@ -51,11 +51,12 @@ class ItemsScreen extends StatelessWidget {
                       IconButton(
                         onPressed: () {
                           Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => UpdateItem(
+                            MaterialPageRoute(
+                              builder: (context) => UpdateItem(
                               itemId: itemId,
-                              itemName: itemName,
-                              itemDescription: itemDescription,
-                             ),
+                              // itemName: itemName,
+                              // itemDescription: itemDescription,
+                            ),
                             ),
                           );
                         },

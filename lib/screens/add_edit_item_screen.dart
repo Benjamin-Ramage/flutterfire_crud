@@ -1,42 +1,65 @@
 import 'package:flutter/material.dart';
-import '../services/firestore_service.dart';
+import '../service/firestore_service.dart';
+import 'package:flutterfire_crud/models/item.dart';
 
-class UpdateItem extends StatefulWidget {
+class AddEditScreen extends StatefulWidget {
   final String itemId;
-  final String itemName;
-  final String itemDescription;
 
-  const UpdateItem({super.key, required this.itemId, required this.itemName, required this.itemDescription});
+  const AddEditScreen({Key? key, required this.itemId}) : super(key: key);
 
   @override
-  State<UpdateItem> createState() => _UpdateItemState();
+  State<AddEditScreen> createState() => _AddEditScreenState();
 }
 
-class _UpdateItemState extends State<UpdateItem> {
+class _AddEditScreenState extends State<AddEditScreen> {
   final  _nameController = TextEditingController();
   final  _descriptionController = TextEditingController();
+  final ValueNotifier<DateTime> _dateTime = ValueNotifier<DateTime>(DateTime.now());
 
   @override
   void initState() {
-    _nameController.text = widget.itemName;
-    _descriptionController.text = widget.itemDescription;
     super.initState();
   }
 
-  void _updateItem(String itemId) {
-    updateItem(itemId, _nameController.text, _descriptionController.text);
+  void _addItem() {
+    Item newItem = Item(name: _nameController.text, description: _descriptionController.text);
+    addItem(newItem);
+  }
+
+  void _showDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2025),
+    ).then((value) {
+      if (value != null) {
+        setState(() {
+          _dateTime.value = value;
+        });
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Item'),
+        title: const Text('Add Item'),
+        actions: [
+          IconButton(
+            onPressed: _showDatePicker,
+            icon: const Icon(Icons.calendar_today),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            const SizedBox(height: 10),
+            Text(_dateTime.toString()),
+            const SizedBox(height: 10),
             TextFormField(
               controller: _nameController,
               decoration: const InputDecoration(labelText: 'Name'),
@@ -51,10 +74,10 @@ class _UpdateItemState extends State<UpdateItem> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    _updateItem(widget.itemId);
+                    _addItem();
                     Navigator.pop(context);
                   },
-                  child: const Text('Update Item'),
+                  child: const Text('Add Item'),
                 ),
               ],
             ),
