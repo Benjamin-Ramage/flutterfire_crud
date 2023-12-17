@@ -14,7 +14,6 @@ import 'package:flutterfire_crud/models/item.dart';
       SetOptions(merge: true));
   }
 
-
   Future<void> deleteItem(String itemId) async {
     await itemsCollection.doc(itemId).delete();
   }
