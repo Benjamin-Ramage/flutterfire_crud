@@ -52,10 +52,10 @@ class ItemsScreen extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => UpdateItem(
+                              builder: (context) => UpdateItemScreen(
                               itemId: itemId,
-                              // itemName: itemName,
-                              // itemDescription: itemDescription,
+                              itemName: itemName,
+                              itemDescription: itemDescription,
                             ),
                             ),
                           );

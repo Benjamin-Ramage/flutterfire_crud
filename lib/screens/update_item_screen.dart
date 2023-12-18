@@ -2,16 +2,23 @@ import 'package:flutter/material.dart';
 import '../service/firestore_service.dart';
 import 'package:flutterfire_crud/models/item.dart';
 
-class UpdateItem extends StatefulWidget {
+class UpdateItemScreen extends StatefulWidget {
   final String itemId;
+  final String itemName;
+  final String itemDescription;
 
-  const UpdateItem({Key? key, required this.itemId}) : super(key: key);
+  const UpdateItemScreen({
+    Key? key,
+    required this.itemId,
+    required this.itemName,
+    required this.itemDescription,
+  }) : super(key: key);
 
   @override
-  State<UpdateItem> createState() => _UpdateItemState();
+  State<UpdateItemScreen> createState() => _UpdateItemScreenState();
 }
 
-class _UpdateItemState extends State<UpdateItem> {
+class _UpdateItemScreenState extends State<UpdateItemScreen> {
   final _uuidController = TextEditingController();
   final  _nameController = TextEditingController();
   final  _descriptionController = TextEditingController();
@@ -19,11 +26,16 @@ class _UpdateItemState extends State<UpdateItem> {
   @override
   void initState() {
     _uuidController.text = widget.itemId;
+    _nameController.text = widget.itemName;
+    _descriptionController.text = widget.itemDescription;
     super.initState();
   }
 
   void _updateItem(String itemId) {
-    Item updatedItem = Item(name: _nameController.text, description: _descriptionController.text);
+    Item updatedItem = Item(
+      name: _nameController.text,
+      description: _descriptionController.text,
+    );
     updateItem(itemId, updatedItem);
   }
 
