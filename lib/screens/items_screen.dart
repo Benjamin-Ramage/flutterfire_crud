@@ -16,7 +16,7 @@ class ItemsScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AddEditScreen(itemId: '')));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AddEditScreen()));
             },
             icon: const Icon(Icons.add),
           ),

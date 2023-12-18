@@ -12,11 +12,13 @@ class UpdateItem extends StatefulWidget {
 }
 
 class _UpdateItemState extends State<UpdateItem> {
+  final _uuidController = TextEditingController();
   final  _nameController = TextEditingController();
   final  _descriptionController = TextEditingController();
 
   @override
   void initState() {
+    _uuidController.text = widget.itemId;
     super.initState();
   }
 
@@ -35,6 +37,13 @@ class _UpdateItemState extends State<UpdateItem> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            const SizedBox(height: 10),
+            TextFormField(
+              controller: _uuidController,
+              decoration: const InputDecoration(labelText: 'UUID'),
+              enabled: false,
+            ),
+            const SizedBox(height: 10),
             TextFormField(
               controller: _nameController,
               decoration: const InputDecoration(labelText: 'Name'),
@@ -64,6 +73,7 @@ class _UpdateItemState extends State<UpdateItem> {
 
   @override
   void dispose() {
+    _uuidController.dispose();
     _nameController.dispose();
     _descriptionController.dispose();
     super.dispose();

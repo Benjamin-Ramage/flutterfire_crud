@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import '../service/firestore_service.dart';
 import 'package:flutterfire_crud/models/item.dart';
+import 'package:uuid/uuid.dart';
 
 class AddEditScreen extends StatefulWidget {
-  final String itemId;
-
-  const AddEditScreen({Key? key, required this.itemId}) : super(key: key);
+  const AddEditScreen({Key? key,}) : super(key: key);
 
   @override
   State<AddEditScreen> createState() => _AddEditScreenState();
 }
 
 class _AddEditScreenState extends State<AddEditScreen> {
+  final String itemId = const Uuid().v1();
   final  _nameController = TextEditingController();
   final  _descriptionController = TextEditingController();
   final ValueNotifier<DateTime> _dateTime = ValueNotifier<DateTime>(DateTime.now());
@@ -58,7 +58,7 @@ class _AddEditScreenState extends State<AddEditScreen> {
         child: Column(
           children: [
             const SizedBox(height: 10),
-            Text(_dateTime.toString()),
+            Text('UUID: $itemId'),
             const SizedBox(height: 10),
             TextFormField(
               controller: _nameController,
