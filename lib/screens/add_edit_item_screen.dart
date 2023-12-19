@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../service/firestore_service.dart';
 import 'package:flutterfire_crud/models/item.dart';
@@ -22,7 +23,8 @@ class _AddEditScreenState extends State<AddEditScreen> {
   }
 
   void _addItem() {
-    Item newItem = Item(name: _nameController.text, description: _descriptionController.text);
+    Timestamp timestampValue = Timestamp.now();
+    Item newItem = Item(name: _nameController.text, description: _descriptionController.text, timestamp: timestampValue);
     addItem(newItem);
   }
 

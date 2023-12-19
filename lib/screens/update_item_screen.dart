@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../service/firestore_service.dart';
 import 'package:flutterfire_crud/models/item.dart';
@@ -32,9 +33,11 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
   }
 
   void _updateItem(String itemId) {
+    Timestamp timestampValue = Timestamp.now();
     Item updatedItem = Item(
       name: _nameController.text,
       description: _descriptionController.text,
+      timestamp: timestampValue,
     );
     updateItem(itemId, updatedItem);
   }
