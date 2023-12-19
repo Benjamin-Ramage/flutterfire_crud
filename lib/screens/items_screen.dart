@@ -35,14 +35,19 @@ class ItemsScreen extends StatelessWidget {
               return const Center(child: Text('No data available'));
             }
             final items = snapshot.data!.docs;
-            return ListView(
-              scrollDirection: Axis.vertical,
-              children: items.map((item) {
+            return ReorderableListView.builder(
+              onReorder: (oldIndex, newIndex) {
+                _reorderItems(oldIndex, newIndex, items);
+              },
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                final item = items[index];
                 final itemId = item.id;
                 final itemData = item.data();
                 final itemName = itemData['name'];
                 final itemDescription = itemData['description'];
                 return ListTile(
+                  key: ValueKey(itemId),
                   title: Text(itemName),
                   subtitle: Text(itemDescription),
                   trailing: Row(
@@ -53,10 +58,10 @@ class ItemsScreen extends StatelessWidget {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => UpdateItemScreen(
-                              itemId: itemId,
-                              itemName: itemName,
-                              itemDescription: itemDescription,
-                            ),
+                                itemId: itemId,
+                                itemName: itemName,
+                                itemDescription: itemDescription,
+                              ),
                             ),
                           );
                         },
@@ -69,10 +74,19 @@ class ItemsScreen extends StatelessWidget {
                     ],
                   ),
                 );
-              }).toList(),
+              },
             );
-          }),
+          },
+      ),
     );
+  }
+
+  void _reorderItems(int oldIndex, int newIndex, List<QueryDocumentSnapshot<Map<String, dynamic>>> items) {
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+    final QueryDocumentSnapshot<Map<String, dynamic>> item = items.removeAt(oldIndex);
+    items.insert(newIndex, item);
   }
 
   void _deleteItem(String itemId) async {
