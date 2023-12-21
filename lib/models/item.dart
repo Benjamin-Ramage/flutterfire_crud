@@ -3,15 +3,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Item {
   String name;
   String description;
+  String serves;
   Timestamp timestamp;
 
-  Item({required this.name, required this.description, required this.timestamp});
+  Item({required this.name, required this.description, required this.serves, required this.timestamp});
 
   Map<String, dynamic> toMap() {
     return {
       'name': name,
       'description': description,
-      'timestamp': timestamp,
+      'serves': serves,
+      'timestamp': FieldValue.serverTimestamp(),
     };
   }
 
@@ -21,7 +23,8 @@ class Item {
     return Item(
       name: data['name'],
       description: data['description'],
-      timestamp: data['timestamp'],
+      serves: data['serves'],
+      timestamp: data['timestamp'] as Timestamp,
     );
   }
 }

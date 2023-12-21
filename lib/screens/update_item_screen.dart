@@ -7,12 +7,14 @@ class UpdateItemScreen extends StatefulWidget {
   final String itemId;
   final String itemName;
   final String itemDescription;
+  final String itemServes;
 
   const UpdateItemScreen({
     Key? key,
     required this.itemId,
     required this.itemName,
     required this.itemDescription,
+    required this.itemServes,
   }) : super(key: key);
 
   @override
@@ -23,12 +25,14 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
   final _uuidController = TextEditingController();
   final  _nameController = TextEditingController();
   final  _descriptionController = TextEditingController();
+  final _servesController = TextEditingController();
 
   @override
   void initState() {
     _uuidController.text = widget.itemId;
     _nameController.text = widget.itemName;
     _descriptionController.text = widget.itemDescription;
+    _servesController.text = widget.itemServes;
     super.initState();
   }
 
@@ -37,6 +41,7 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
     Item updatedItem = Item(
       name: _nameController.text,
       description: _descriptionController.text,
+      serves: _servesController.text,
       timestamp: timestampValue,
     );
     updateItem(itemId, updatedItem);
@@ -66,6 +71,10 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
             TextFormField(
               controller: _descriptionController,
               decoration: const InputDecoration(labelText: 'Description'),
+            ),
+            TextFormField(
+              controller: _servesController,
+              decoration: const InputDecoration(labelText: 'Serves'),
             ),
             const SizedBox(height: 10),
             Row(

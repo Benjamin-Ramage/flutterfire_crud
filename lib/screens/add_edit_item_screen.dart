@@ -15,6 +15,7 @@ class _AddEditScreenState extends State<AddEditScreen> {
   final String itemId = const Uuid().v1();
   final  _nameController = TextEditingController();
   final  _descriptionController = TextEditingController();
+  final _servesController = TextEditingController();
   final ValueNotifier<DateTime> _dateTime = ValueNotifier<DateTime>(DateTime.now());
 
   @override
@@ -24,7 +25,7 @@ class _AddEditScreenState extends State<AddEditScreen> {
 
   void _addItem() {
     Timestamp timestampValue = Timestamp.now();
-    Item newItem = Item(name: _nameController.text, description: _descriptionController.text, timestamp: timestampValue);
+    Item newItem = Item(name: _nameController.text, description: _descriptionController.text, serves: _servesController.text, timestamp: timestampValue);
     addItem(newItem);
   }
 
@@ -69,6 +70,10 @@ class _AddEditScreenState extends State<AddEditScreen> {
             TextFormField(
               controller: _descriptionController,
               decoration: const InputDecoration(labelText: 'Description'),
+            ),
+            TextFormField(
+              controller: _servesController,
+              decoration: const InputDecoration(labelText: 'Serves'),
             ),
             const SizedBox(height: 10),
             Row(
