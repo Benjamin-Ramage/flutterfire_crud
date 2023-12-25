@@ -8,6 +8,11 @@ class BensTheme {
       fontWeight: FontWeight.w700,
       color: Colors.black,
     ),
+    bodyText2: GoogleFonts.poppins(
+      fontSize: 12.0,
+      fontWeight: FontWeight.w700,
+      color: Colors.red,
+    ),
     headline1: GoogleFonts.poppins(
       fontSize: 32.0,
       fontWeight: FontWeight.bold,

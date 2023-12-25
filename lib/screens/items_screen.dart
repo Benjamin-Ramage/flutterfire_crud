@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:flutterfire_crud/models/item.dart';
+import 'package:flutterfire_crud/widgets/recipe_card.dart';
 import 'package:flutterfire_crud/screens/add_edit_item_screen.dart';
-import 'package:flutterfire_crud/screens/update_item_screen.dart';
 import 'package:flutterfire_crud/service/firestore_service.dart';
 
 class ItemsScreen extends StatelessWidget {
@@ -37,57 +37,19 @@ class ItemsScreen extends StatelessWidget {
           }
           final items = snapshot.data!.docs;
 
-          return ListView.separated(
-            scrollDirection: Axis.vertical,
-            separatorBuilder: (context, index) {
-              return const SizedBox(height: 10.0);
-            },
+          return ListView.builder(
             itemCount: items.length,
             itemBuilder: (context, index) {
               final item = items[index];
               if (item != null) {
-                final itemId = item.id;
                 final itemName = item['name'];
                 final itemDescription = item['description'];
                 final itemServes = item['serves'];
                 final timestamp = item['timestamp'] as Timestamp?;
                 if (timestamp != null) {
-                  final formattedDateTime = _formatDateTime(timestamp.toDate());
-                  return ListTile(
-                    key: ValueKey(itemId),
-                    leading: Text(itemServes),
-                    title: Text(itemName),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(itemDescription),
-                        Text('Date: $formattedDateTime'),
-                      ],
-                    ),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => UpdateItemScreen(
-                                  itemId: itemId,
-                                  itemName: itemName,
-                                  itemDescription: itemDescription,
-                                  itemServes: itemServes,
-                                ),
-                              ),
-                            );
-                          },
-                          icon: const Icon(Icons.edit),
-                        ),
-                        IconButton(
-                          onPressed: () => _deleteItem(itemId),
-                          icon: const Icon(Icons.delete),
-                        ),
-                      ],
-                    ),
+                  return RecipeCard(
+                    item: Item(name: itemName, description: itemDescription, serves: itemServes, timestamp: timestamp),
+                    myDateTime: timestamp.toDate(),
                   );
                 }
               }
@@ -98,11 +60,6 @@ class ItemsScreen extends StatelessWidget {
         },
       ),
     );
-  }
-
-  String _formatDateTime(DateTime dateTime) {
-    final formatter = DateFormat('MMM d, y');
-    return formatter.format(dateTime);
   }
 
   void _deleteItem(String itemId) async {

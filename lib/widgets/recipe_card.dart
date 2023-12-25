@@ -1,101 +1,107 @@
 import 'package:flutter/material.dart';
 import 'package:flutterfire_crud/models/item.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 
+// ignore: must_be_immutable
 class RecipeCard extends StatelessWidget {
   final int index = 0;
   final Item item;
-  const RecipeCard({Key? key, required this.item}) : super(key: key);
+  DateTime myDateTime = DateTime.now();
+
+  RecipeCard({Key? key, required this.item, required this.myDateTime}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(),
-      ),
-      child: Column(
-        children: [
-          buildHeader(context, index),
-          buildRecipeImage(),
-          buildActions(context),
-          Padding(padding: const EdgeInsets.symmetric(
-              horizontal: 12.0,
+    return Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(),
+        ),
+        child: Column(
+          children: [
+            buildHeader(context, index),
+            buildRecipeImage(),
+            buildActions(context),
+            Padding(padding: const EdgeInsets.symmetric(
+                horizontal: 12.0,
+              ),
+              child: Row(
+                children: [
+                  buildInfoColumn(context, 'Name:', item.name)
+                ],
+              ),
             ),
-            child: Row(
-              children: [
-                buildInfoColumn(context, 'Name:', item.name)
-              ],
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12.0,
+              ),
+              child: Row(
+                children: [
+                  buildInfoColumn(context, 'Description:', item.description)
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 12.0,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12.0,
+              ),
+              child: Row(
+                children: [
+                  buildInfoColumn(context, 'Ingredients:', item.serves),
+                  buildInfoColumn(context, 'Equipment:', item.serves),
+                  // Add more info columns as needed
+                ],
+              ),
             ),
-            child: Row(
-              children: [
-                buildInfoColumn(context, 'Description:', item.description)
-              ],
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12.0,
+              ),
+              child: Row(
+                children: [
+                  buildInfoColumn(context, 'Prep Time:', item.serves),
+                  buildInfoColumn(context, 'Cook Time:', item.serves),
+                  // Add more info columns as needed
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 12.0,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12.0,
+              ),
+              child: Row(
+                children: [
+                  buildInfoColumn(context, 'Serves:', item.serves),
+                  buildInfoColumn(context, 'Cook Temp:', item.serves),
+                  // Add more info columns as needed
+                ],
+              ),
             ),
-            child: Row(
-              children: [
-                buildInfoColumn(context, 'Ingredients:', item.serves),
-                buildInfoColumn(context, 'Equipment:', item.serves),
-                // Add more info columns as needed
-              ],
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12.0,
+              ),
+              child: Row(
+                children: [
+                  buildInfoColumn(context, 'Method:', item.serves),
+                  // Add more info columns as needed
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 12.0,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12.0,
+              ),
+              child: Row(
+                children: [
+                  DateTimeFormatterWidget(label: 'Date:', dateTime: myDateTime),
+                ],
+              ),
             ),
-            child: Row(
-              children: [
-                buildInfoColumn(context, 'Prep Time:', item.serves),
-                buildInfoColumn(context, 'Cook Time:', item.serves),
-                // Add more info columns as needed
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 12.0,
-            ),
-            child: Row(
-              children: [
-                buildInfoColumn(context, 'Serves:', item.serves),
-                buildInfoColumn(context, 'Cook Temp:', item.serves),
-                // Add more info columns as needed
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 12.0,
-            ),
-            child: Row(
-              children: [
-                buildInfoColumn(context, 'Method:', item.serves),
-                // Add more info columns as needed
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 12.0,
-            ),
-            child: Row(
-              children: [
-                buildInfoColumn(context, 'Date:', item.serves),
-                // Add more info columns as needed
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -241,7 +247,6 @@ Widget buildIconButton(IconData icon, VoidCallback onPressed) {
     onPressed: onPressed,
     icon: Icon(
       icon,
-      color: Colors.black38,
     ),
   );
 }
@@ -251,7 +256,7 @@ Widget buildBookmarkIconButton() {
     child: Align(
       alignment: Alignment.bottomRight,
       child: IconButton(
-        icon: const Icon(FontAwesomeIcons.solidBookmark),
+        icon: const Icon(FontAwesomeIcons.bookmark),
         onPressed: () {  },
       ),
     ),
@@ -287,52 +292,30 @@ Widget buildInfoColumn(BuildContext context, String label, String value, {Color?
   );
 }
 
-// class RecipeDateWidget extends StatelessWidget {
-//   final Item item;
-//
-//   const RecipeDateWidget({
-//     Key? key,
-//     required this.item,
-//   }) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(
-//         horizontal: 12.0,
-//         vertical: 4.0,
-//       ),
-//       child: Row(
-//         children: [
-//           Expanded(
-//             child: buildDateColumn(context),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-//
-//   Widget buildDateColumn(context) {
-//     return Column(
-//       mainAxisSize: MainAxisSize.min,
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         buildDateText(context),
-//       ],
-//     );
-//   }
-//
-//   Widget buildDateText(BuildContext context) {
-//     return RichText(
-//       text: TextSpan(
-//         style: DefaultTextStyle.of(context).style,
-//         children: [
-//           TextSpan(
-//             text: DateFormat('dd-MM-yyyy').format(item.timestamp),
-//             style: Theme.of(context).textTheme.bodyText1,
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+
+class DateTimeFormatterWidget extends StatelessWidget {
+  final String label;
+  final DateTime dateTime;
+
+  const DateTimeFormatterWidget({Key? key, required this.label, required this.dateTime}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final formatter = DateFormat('MMM d, y');
+    final formattedDate = formatter.format(dateTime);
+
+    return Row(
+      children: [
+        Text(
+          label,
+          style: Theme.of(context).textTheme.bodyText2,
+        ),
+        const SizedBox(width: 5.0),
+        Text(
+          formattedDate,
+          style: Theme.of(context).textTheme.bodyText1,
+        ),
+      ],
+    );
+  }
+}
