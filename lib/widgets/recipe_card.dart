@@ -19,88 +19,91 @@ class RecipeCard extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(),
         ),
-        child: Column(
-          children: [
-            buildHeader(context, index),
-            buildRecipeImage(),
-            buildActions(context),
-            Padding(padding: const EdgeInsets.symmetric(
-                horizontal: 12.0,
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: Column(
+            children: [
+              buildHeader(context, index),
+              buildRecipeImage(),
+              buildActions(context),
+              Padding(padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                ),
+                child: Row(
+                  children: [
+                    buildInfoColumn(context, 'Name:', item.name)
+                  ],
+                ),
               ),
-              child: Row(
-                children: [
-                  buildInfoColumn(context, 'Name:', item.name)
-                ],
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                ),
+                child: Row(
+                  children: [
+                    buildInfoColumn(context, 'Description:', item.description)
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12.0,
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                ),
+                child: Row(
+                  children: [
+                    buildInfoColumn(context, 'Ingredients:', item.serves),
+                    buildInfoColumn(context, 'Equipment:', item.serves),
+                    // Add more info columns as needed
+                  ],
+                ),
               ),
-              child: Row(
-                children: [
-                  buildInfoColumn(context, 'Description:', item.description)
-                ],
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                ),
+                child: Row(
+                  children: [
+                    buildInfoColumn(context, 'Prep Time:', item.serves),
+                    buildInfoColumn(context, 'Cook Time:', item.serves),
+                    // Add more info columns as needed
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12.0,
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                ),
+                child: Row(
+                  children: [
+                    buildInfoColumn(context, 'Serves:', item.serves),
+                    buildInfoColumn(context, 'Cook Temp:', item.serves),
+                    // Add more info columns as needed
+                  ],
+                ),
               ),
-              child: Row(
-                children: [
-                  buildInfoColumn(context, 'Ingredients:', item.serves),
-                  buildInfoColumn(context, 'Equipment:', item.serves),
-                  // Add more info columns as needed
-                ],
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                ),
+                child: Row(
+                  children: [
+                    buildInfoColumn(context, 'Method:', item.serves),
+                    // Add more info columns as needed
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12.0,
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                ),
+                child: Row(
+                  children: [
+                    DateTimeFormatterWidget(label: 'Date:', dateTime: myDateTime),
+                  ],
+                ),
               ),
-              child: Row(
-                children: [
-                  buildInfoColumn(context, 'Prep Time:', item.serves),
-                  buildInfoColumn(context, 'Cook Time:', item.serves),
-                  // Add more info columns as needed
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12.0,
-              ),
-              child: Row(
-                children: [
-                  buildInfoColumn(context, 'Serves:', item.serves),
-                  buildInfoColumn(context, 'Cook Temp:', item.serves),
-                  // Add more info columns as needed
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12.0,
-              ),
-              child: Row(
-                children: [
-                  buildInfoColumn(context, 'Method:', item.serves),
-                  // Add more info columns as needed
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12.0,
-              ),
-              child: Row(
-                children: [
-                  DateTimeFormatterWidget(label: 'Date:', dateTime: myDateTime),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
