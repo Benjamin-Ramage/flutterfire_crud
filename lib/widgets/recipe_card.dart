@@ -165,8 +165,8 @@ Widget buildEllipsisButton(BuildContext context, int index) {
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(5.0),
-                  topRight: Radius.circular(5.0),
+                  topLeft: Radius.circular(2.5),
+                  topRight: Radius.circular(2.5),
                 ),
                 boxShadow: [
                   BoxShadow(

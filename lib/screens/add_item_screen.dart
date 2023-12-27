@@ -1,17 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../service/firestore_service.dart';
 import 'package:flutterfire_crud/models/item.dart';
+import '../service/firestore_service.dart';
 import 'package:uuid/uuid.dart';
 
-class AddEditScreen extends StatefulWidget {
-  const AddEditScreen({Key? key,}) : super(key: key);
+class AddItemScreen extends StatefulWidget {
+  const AddItemScreen({Key? key,}) : super(key: key);
 
   @override
-  State<AddEditScreen> createState() => _AddEditScreenState();
+  State<AddItemScreen> createState() => _AddItemScreenState();
 }
 
-class _AddEditScreenState extends State<AddEditScreen> {
+class _AddItemScreenState extends State<AddItemScreen> {
   final String itemId = const Uuid().v1();
   final  _nameController = TextEditingController();
   final  _descriptionController = TextEditingController();
@@ -67,10 +67,12 @@ class _AddEditScreenState extends State<AddEditScreen> {
               controller: _nameController,
               decoration: const InputDecoration(labelText: 'Name'),
             ),
+            const SizedBox(height: 10),
             TextFormField(
               controller: _descriptionController,
               decoration: const InputDecoration(labelText: 'Description'),
             ),
+            const SizedBox(height: 10),
             TextFormField(
               controller: _servesController,
               decoration: const InputDecoration(labelText: 'Serves'),

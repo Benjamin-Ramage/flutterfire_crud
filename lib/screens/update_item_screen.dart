@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../service/firestore_service.dart';
 import 'package:flutterfire_crud/models/item.dart';
+import '../service/firestore_service.dart';
 
 class UpdateItemScreen extends StatefulWidget {
   final String itemId;
@@ -68,10 +68,12 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
               controller: _nameController,
               decoration: const InputDecoration(labelText: 'Name'),
             ),
+            const SizedBox(height: 10),
             TextFormField(
               controller: _descriptionController,
               decoration: const InputDecoration(labelText: 'Description'),
             ),
+            const SizedBox(height: 10),
             TextFormField(
               controller: _servesController,
               decoration: const InputDecoration(labelText: 'Serves'),
